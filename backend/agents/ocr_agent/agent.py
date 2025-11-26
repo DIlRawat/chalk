@@ -1,7 +1,7 @@
 from google.adk.agents.llm_agent import Agent
 
 ocr_agent = Agent(
-    model='gemini-2.5-flash',
+    model='gemini-1.5-flash',
     name='ocr_agent',
     description='An agent that evaluates handwriting.',
     instruction="""

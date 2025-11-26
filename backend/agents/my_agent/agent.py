@@ -2,7 +2,7 @@ from google.adk.agents.llm_agent import Agent
 from google.adk.tools import AgentTool, FunctionTool, google_search
 
 root_agent = Agent(
-    model='gemini-2.5-flash',
+    model='gemini-1.5-flash',
     name='root_agent',
     description='A helpful assistant for user questions.',
     instruction= 
