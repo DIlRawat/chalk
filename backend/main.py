@@ -19,9 +19,7 @@ from google.adk.sessions.base_session_service import BaseSessionService, GetSess
 from google.adk.sessions.session import Session
 
 # Load environment variables
-dotenv_path = Path('agents/my_agent/.env')
-if dotenv_path.exists():
-    load_dotenv(dotenv_path)
+load_dotenv()
 
 class SimpleSessionService(BaseSessionService):
     def __init__(self):
