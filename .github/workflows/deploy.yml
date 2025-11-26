@@ -1,0 +1,53 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main  # Set this to your default branch name
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-east4 # Make sure this matches your Artifact Registry region
+  REPO_NAME: backend-repo
+  SERVICE_NAME: ai-backend
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Authenticate with Google Cloud
+      - name: Google Auth
+        id: auth
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      # Setup gcloud CLI
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      # Configure Docker to use gcloud as a credential helper
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+
+      # Build and Push Container
+      - name: Build and Push Container
+        run: |
+          docker build -t ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }} .
+          docker push ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      # Deploy to Cloud Run
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v0
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          image: ${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+          region: ${{ env.REGION }}
+          flags: '--allow-unauthenticated' # Makes it public.
+          env_vars: |
+            # Add any non-secret env vars here if needed
+            # For secrets (like API keys), see Step 5 below
