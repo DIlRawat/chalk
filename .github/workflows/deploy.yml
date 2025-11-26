@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Set this to your default branch name
+    paths:
+      - 'backend/**'
 
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
