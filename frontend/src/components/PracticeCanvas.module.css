@@ -1,0 +1,334 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(152, 216, 200, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    margin: 20px auto;
+    backdrop-filter: blur(10px);
+}
+
+.container h2 {
+    font-size: 2rem;
+    color: #98D8C8;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.canvasWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.canvasArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas {
+    border: 3px solid #98D8C8;
+    border-radius: 16px;
+    background-color: white;
+    cursor: crosshair;
+    touch-action: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+.canvas:hover {
+    box-shadow: 0 6px 20px rgba(152, 216, 200, 0.4);
+}
+
+.navButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(152, 216, 200, 0.3);
+    color: #98D8C8;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.navButton:hover {
+    background: rgba(152, 216, 200, 0.2);
+    border-color: #98D8C8;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(152, 216, 200, 0.3);
+}
+
+.navButton:active {
+    transform: scale(0.95);
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.iconButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    color: #F5F5DC;
+    border: 1px solid rgba(152, 216, 200, 0.3);
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.iconButton:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #98D8C8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(152, 216, 200, 0.3);
+}
+
+.iconButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.checkButton {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.checkButton:hover:not(:disabled) {
+    background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+}
+
+.feedback {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.feedbackContent {
+    flex: 1;
+}
+
+.feedbackContent p {
+    margin: 8px 0;
+    font-size: 1.05rem;
+}
+
+.feedbackContent strong {
+    font-size: 1.3rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.audioButton {
+    background: rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    font-size: 1.8rem;
+    color: inherit;
+    padding: 10px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audioButton:hover {
+    background: rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+}
+
+.success {
+    background: rgba(76, 175, 80, 0.2);
+    color: #81C784;
+    border: 2px solid rgba(76, 175, 80, 0.5);
+}
+
+.error {
+    background: rgba(244, 67, 54, 0.2);
+    color: #EF9A9A;
+    border: 2px solid rgba(244, 67, 54, 0.5);
+}
+
+.hintSection {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(152, 216, 200, 0.2);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.hintButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #ff9800 0%, #ff6b00 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 3px 10px rgba(255, 152, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.hintButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.5);
+}
+
+.hintButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.coachHint {
+    background: rgba(255, 152, 0, 0.1);
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    padding: 15px 20px;
+    border-radius: 12px;
+    color: #FFB84D;
+    animation: fadeIn 0.3s ease-in;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.hintContent {
+    flex: 1;
+}
+
+.hintContent strong {
+    margin-right: 8px;
+    color: #FFA726;
+}
+
+.audioButton {
+    background: rgba(255, 152, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #FFA726;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audioButton:hover {
+    background: rgba(255, 152, 0, 0.3);
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .container h2 {
+        font-size: 1.5rem;
+    }
+
+    .canvasWrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navButton {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .iconButton {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .feedback {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navigation {
+        flex-direction: column;
+        width: 100%;
+    }
+}

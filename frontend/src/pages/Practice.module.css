@@ -1,0 +1,304 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background: linear-gradient(180deg, #0a1f1f 0%, #1a2f2f 50%, #2a3f3f 100%);
+    color: #F5F5DC;
+}
+
+.topBar {
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(152, 216, 200, 0.2);
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.backButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(152, 216, 200, 0.3);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #F5F5DC;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.backButton:hover {
+    background: rgba(152, 216, 200, 0.1);
+    border-color: #98D8C8;
+    transform: translateX(-3px);
+}
+
+.selectionContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.selectionContent h1 {
+    font-size: 2.5rem;
+    color: #98D8C8;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: rgba(245, 245, 220, 0.7);
+    margin: 0 0 50px 0;
+    text-align: center;
+}
+
+.selection {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.modeButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 40px 60px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(152, 216, 200, 0.3);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 250px;
+    backdrop-filter: blur(10px);
+}
+
+.modeButton:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #98D8C8;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(152, 216, 200, 0.3);
+}
+
+.modeIcon {
+    font-size: 4rem;
+}
+
+.modeTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #98D8C8;
+}
+
+.modeLabel {
+    font-size: 1.1rem;
+    color: rgba(245, 245, 220, 0.7);
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(152, 216, 200, 0.2);
+    flex-shrink: 0;
+    z-index: 10;
+    gap: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #98D8C8;
+    flex: 1;
+    text-align: center;
+}
+
+.header .backButton {
+    flex-shrink: 0;
+}
+
+.header .hintButton {
+    flex-shrink: 0;
+}
+
+/* Practice content area */
+.practiceContent {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.coachSection {
+    margin: 30px auto;
+    max-width: 600px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(152, 216, 200, 0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.characterCounter {
+    text-align: center;
+    color: rgba(245, 245, 220, 0.7);
+    font-size: 1.1rem;
+    margin: 20px 0;
+}
+
+.coachHint {
+    background: rgba(255, 152, 0, 0.1);
+    border: 2px solid rgba(255, 152, 0, 0.3);
+    border-bottom: none;
+    padding: 15px 40px;
+    color: #FFB84D;
+    animation: slideDown 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 100%;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hintContent {
+    flex: 1;
+    max-width: 800px;
+    text-align: center;
+}
+
+.hintContent strong {
+    margin-right: 8px;
+    color: #FFA726;
+}
+
+.hintButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #ff9800 0%, #ff6b00 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.hintButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 152, 0, 0.5);
+}
+
+.hintButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.audioButton {
+    background: rgba(255, 152, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #FFA726;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audioButton:hover {
+    background: rgba(255, 152, 0, 0.3);
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .topBar,
+    .header {
+        padding: 15px 20px;
+    }
+
+    .header h1 {
+        font-size: 1.4rem;
+    }
+
+    .header .backButton {
+        left: 20px;
+    }
+
+    .selectionContent h1 {
+        font-size: 2rem;
+    }
+
+    .selection {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .modeButton {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .coachSection {
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .coachHint {
+        flex-direction: column;
+        text-align: center;
+    }
+}

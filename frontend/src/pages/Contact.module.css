@@ -1,0 +1,94 @@
+.page {
+    height: calc(100vh - 72px);
+    background: linear-gradient(180deg, #0a1f1f 0%, #1a2f2f 50%, #2a3f3f 100%);
+    color: #F5F5DC;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    overflow-y: auto;
+}
+
+.content {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(152, 216, 200, 0.2);
+    border-radius: 20px;
+    padding: 80px 60px;
+    backdrop-filter: blur(10px);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.comingSoon {
+    margin-bottom: 40px;
+}
+
+.comingSoon h1 {
+    font-size: 3.5rem;
+    color: #98D8C8;
+    margin: 0 0 30px 0;
+    font-weight: 700;
+}
+
+.comingSoon p {
+    font-size: 1.2rem;
+    color: rgba(245, 245, 220, 0.8);
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+.cta {
+    margin-top: 50px;
+}
+
+.ctaButton {
+    display: inline-block;
+    background: linear-gradient(135deg, #98D8C8 0%, #87CEEB 100%);
+    color: #1a2f2f;
+    text-decoration: none;
+    padding: 16px 40px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(152, 216, 200, 0.3);
+    transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(152, 216, 200, 0.5);
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    border-top: 1px solid rgba(152, 216, 200, 0.2);
+    color: rgba(245, 245, 220, 0.6);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 60px 30px;
+    }
+
+    .comingSoon h1 {
+        font-size: 2.5rem;
+    }
+
+    .comingSoon p {
+        font-size: 1rem;
+    }
+}
