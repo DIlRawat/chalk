@@ -20,7 +20,8 @@ from google.adk.sessions.session import Session
 
 # Load environment variables
 dotenv_path = Path('agents/my_agent/.env')
-load_dotenv(dotenv_path)
+if dotenv_path.exists():
+    load_dotenv(dotenv_path)
 
 class SimpleSessionService(BaseSessionService):
     def __init__(self):
@@ -71,9 +72,12 @@ class SimpleSessionService(BaseSessionService):
 app = FastAPI()
 
 # CORS
+import os
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
