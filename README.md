@@ -17,21 +17,30 @@ The application uses a **FastAPI** backend with **Google's Agent Development Kit
 
 ```mermaid
 graph TD
-    User[User] -->|Selects Language| Frontend[React Frontend]
-    Frontend -->|/get-characters| Backend[FastAPI Backend]
-    Backend -->|Orchestrates| RootAgent[Language Agent]
-    RootAgent -->|Returns| Characters[Character Set]
+    User[User] -->|1. Selects Language| Frontend[React Frontend]
+    Frontend -->|2. GET /get-characters| Backend[FastAPI Backend]
+    Backend -->|3. Calls| LangAgent[Language Agent]
+    LangAgent -->|4. Returns Characters| Frontend
     
-    User -->|Draws Character| Frontend
-    Frontend -->|/check-ocr| Backend
-    Backend -->|Orchestrates| OCRAgent[OCR Agent]
-    OCRAgent -->|Gemini Vision| Vision[Gemini 2.5 Flash]
-    Vision -->|Feedback| Frontend
+    User -->|5. Draws Character| Canvas[Canvas UI]
+    
+    subgraph "Practice Loop"
+        Canvas -->|6. Click 'Check Me'| Backend
+        Backend -->|7. Calls| OCRAgent[OCR Agent]
+        OCRAgent -->|8. Analyzes Image| Vision[Gemini 1.5 Flash]
+        Vision -->|9. Returns Feedback| Frontend
+        
+        Canvas -->|10. Click 'Get Hint'| Backend
+        Backend -->|11. Calls| CoachAgent[Coach Agent]
+        CoachAgent -->|12. Generates Hint| Vision
+        Vision -->|13. Returns Hint| Frontend
+    end
 ```
 
 ### Agents
 - **Language Agent**: Retrieves the alphabet and digits for a selected language.
 - **OCR Agent**: Uses Gemini 1.5 Flash (Vision) to compare the user's drawing with the expected character, providing confidence scores and specific feedback.
+- **Coach Agent**: Analyzes the user's drawing to provide encouraging hints and specific improvement tips without revealing the answer.
 
 ## 🚀 Setup
 
