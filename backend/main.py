@@ -172,11 +172,14 @@ async def get_characters(req: LanguageRequest, request: Request):
         
     except json.JSONDecodeError as e:
         print(f"JSONDecodeError: {e}")
-        print(f"Output: {output_text}")
-        raise HTTPException(status_code=500, detail="Agent returned invalid JSON.")
+        print(f"Raw output: {output_text}")
+        print(f"Cleaned output: {cleaned_text}")
+        raise HTTPException(status_code=500, detail=f"Agent returned invalid JSON: {str(e)}")
         
     except Exception as e:
         print(f"Error: {e}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/check-ocr")
