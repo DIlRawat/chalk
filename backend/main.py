@@ -148,13 +148,23 @@ async def get_characters(req: LanguageRequest, request: Request):
         
         # Run the agent with the session
         output_text = ""
+        print(f"Running agent for language: {language}")
+        event_count = 0
         for event in runner.run(
             user_id='user',
             session_id=session.id,
             new_message=content
         ):
+            event_count += 1
+            print(f"Event {event_count}: {event}")
             if event.content.parts and event.content.parts[0].text:
                 output_text = event.content.parts[0].text
+                print(f"Got text output: {output_text[:100]}...")
+        
+        print(f"Total events: {event_count}, Final output length: {len(output_text)}")
+        
+        if not output_text:
+            raise HTTPException(status_code=500, detail="Agent returned no output")
         
         # Clean markdown code blocks if present
         cleaned_text = output_text.strip()
