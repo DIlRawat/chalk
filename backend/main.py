@@ -21,6 +21,10 @@ from google.adk.sessions.session import Session
 # Load environment variables
 load_dotenv()
 
+# Apply nest_asyncio to fix event loop issues with ADK
+import nest_asyncio
+nest_asyncio.apply()
+
 # Configure Google GenAI with API key
 import os
 import google.generativeai as genai
@@ -139,7 +143,7 @@ async def startup_event():
         model_names = [m.name for m in models]
         print(f"Successfully listed {len(models)} models.")
         
-        target_model = "models/gemini-1.5-flash"
+        target_model = "models/gemini-2.0-flash"
         if target_model in model_names:
             print(f"CONFIRMED: {target_model} is available.")
         else:

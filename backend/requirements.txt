@@ -20,3 +20,4 @@ httpx==0.28.1
 
 # Async support
 anyio==4.11.0
+nest_asyncio==1.6.0
