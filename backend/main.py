@@ -21,6 +21,17 @@ from google.adk.sessions.session import Session
 # Load environment variables
 load_dotenv()
 
+# Configure Google GenAI with API key
+import os
+import google.genai as genai
+
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    print("WARNING: GEMINI_API_KEY not found in environment variables!")
+else:
+    print(f"Configuring GenAI with API key: {api_key[:10]}...")
+    genai.configure(api_key=api_key)
+
 class SimpleSessionService(BaseSessionService):
     def __init__(self):
         self._sessions: Dict[str, Session] = {}
