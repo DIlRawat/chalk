@@ -16,25 +16,34 @@ Learning a new script (like Hindi, Nepali, or even English cursive) is challengi
 The application uses a **FastAPI** backend with **Google's Agent Development Kit (ADK)** and a **React** frontend.
 
 ```mermaid
-graph TD
-    User[User] -->|1. Selects Language| Frontend[React Frontend]
-    Frontend -->|2. GET /get-characters| Backend[FastAPI Backend]
-    Backend -->|3. Calls| LangAgent[Language Agent]
-    LangAgent -->|4. Returns Characters| Frontend
+graph LR
+    User((User))
     
-    User -->|5. Draws Character| Canvas[Canvas UI]
-    
-    subgraph "Practice Loop"
-        Canvas -->|6. Click 'Check Me'| Backend
-        Backend -->|7. Calls| OCRAgent[OCR Agent]
-        OCRAgent -->|8. Analyzes Image| Vision[Gemini 1.5 Flash]
-        Vision -->|9. Returns Feedback| Frontend
-        
-        Canvas -->|10. Click 'Get Hint'| Backend
-        Backend -->|11. Calls| CoachAgent[Coach Agent]
-        CoachAgent -->|12. Generates Hint| Vision
-        Vision -->|13. Returns Hint| Frontend
+    subgraph Frontend [React Frontend]
+        UI[Interface]
+        Canvas[Canvas]
     end
+
+    subgraph Backend [Backend System]
+        API[FastAPI]
+        
+        subgraph Agents [AI Agents]
+            Lang[Language]
+            OCR[OCR]
+            Coach[Coach]
+        end
+        
+        Gemini[Gemini 2.0 Flash]
+    end
+
+    User -->|Interacts| UI
+    User -->|Draws| Canvas
+    
+    UI <-->|Get Characters| Lang
+    Canvas <-->|Check Drawing| OCR
+    Canvas <-->|Get Hint| Coach
+    
+    Agents <-->|Inference| Gemini
 ```
 
 ### Agents
