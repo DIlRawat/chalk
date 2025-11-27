@@ -23,9 +23,12 @@ load_dotenv()
 
 # Configure Google GenAI with API key
 import os
-import google.genai as genai
+import google.generativeai as genai
 
 api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    api_key = os.getenv("GOOGLE_API_KEY")
+
 if not api_key:
     print("WARNING: GEMINI_API_KEY not found in environment variables!")
 else:
