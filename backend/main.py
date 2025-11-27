@@ -31,6 +31,8 @@ if not api_key:
 else:
     print(f"Configuring GenAI with API key: {api_key[:10]}...")
     genai.configure(api_key=api_key)
+    # Also set GOOGLE_API_KEY environment variable as fallback for some libraries
+    os.environ["GOOGLE_API_KEY"] = api_key
 
 class SimpleSessionService(BaseSessionService):
     def __init__(self):
@@ -129,6 +131,14 @@ async def startup_event():
     
     app.state.session_service = session_service
     print("Runners initialized with SimpleSessionService")
+    
+    # Verify API connectivity
+    try:
+        print("Verifying Gemini API connectivity...")
+        models = list(genai.list_models())
+        print(f"Successfully listed {len(models)} models. First few: {[m.name for m in models[:3]]}")
+    except Exception as e:
+        print(f"CRITICAL: Failed to connect to Gemini API: {e}")
 
 @app.get("/")
 async def root():
@@ -159,20 +169,27 @@ async def get_characters(req: LanguageRequest, request: Request):
         
         # Run the agent with the session
         output_text = ""
-        print(f"Running agent for language: {language}")
+        print(f"Running agent for language: {language}", flush=True)
         event_count = 0
-        for event in runner.run(
-            user_id='user',
-            session_id=session.id,
-            new_message=content
-        ):
-            event_count += 1
-            print(f"Event {event_count}: {event}")
-            if event.content.parts and event.content.parts[0].text:
-                output_text = event.content.parts[0].text
-                print(f"Got text output: {output_text[:100]}...")
         
-        print(f"Total events: {event_count}, Final output length: {len(output_text)}")
+        try:
+            for event in runner.run(
+                user_id='user',
+                session_id=session.id,
+                new_message=content
+            ):
+                event_count += 1
+                print(f"Event {event_count}: {event}", flush=True)
+                if event.content.parts and event.content.parts[0].text:
+                    output_text = event.content.parts[0].text
+                    print(f"Got text output: {output_text[:100]}...", flush=True)
+        except Exception as e:
+            print(f"Error during runner execution: {e}", flush=True)
+            import traceback
+            traceback.print_exc()
+            raise HTTPException(status_code=500, detail=f"Agent execution failed: {str(e)}")
+        
+        print(f"Total events: {event_count}, Final output length: {len(output_text)}", flush=True)
         
         if not output_text:
             raise HTTPException(status_code=500, detail="Agent returned no output")
