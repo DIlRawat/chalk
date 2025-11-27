@@ -27,9 +27,6 @@ import google.generativeai as genai
 
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
-    api_key = os.getenv("GOOGLE_API_KEY")
-
-if not api_key:
     print("WARNING: GEMINI_API_KEY not found in environment variables!")
 else:
     print(f"Configuring GenAI with API key: {api_key[:10]}...")
@@ -139,7 +136,16 @@ async def startup_event():
     try:
         print("Verifying Gemini API connectivity...")
         models = list(genai.list_models())
-        print(f"Successfully listed {len(models)} models. First few: {[m.name for m in models[:3]]}")
+        model_names = [m.name for m in models]
+        print(f"Successfully listed {len(models)} models.")
+        
+        target_model = "models/gemini-1.5-flash"
+        if target_model in model_names:
+            print(f"CONFIRMED: {target_model} is available.")
+        else:
+            print(f"WARNING: {target_model} NOT found in available models!")
+            print(f"Available models: {model_names}")
+            
     except Exception as e:
         print(f"CRITICAL: Failed to connect to Gemini API: {e}")
 
